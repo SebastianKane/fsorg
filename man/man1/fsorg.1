@@ -1,0 +1,56 @@
+.TH ORGANIZE_BY_MONTH 1 "December 2024" "Version 1.1" "User Commands"
+.SH NAME
+organize_by_month \- Organize subdirectories by month-year based on their modification date
+
+.SH SYNOPSIS
+.B organize_by_month
+[\fI/path/to/parent_directory\fR]
+
+.SH DESCRIPTION
+The
+.B organize_by_month
+script scans all subdirectories within the specified parent directory and sorts them into subfolders named by their Year-Month date, derived from each subdirectory’s last modification time.
+
+This helps in organizing large sets of directories (such as projects, images, or backups) into a predictable time-based structure.
+
+.SH OPTIONS
+No additional command-line options are currently implemented besides the required parent directory argument.
+
+.SH USAGE
+To organize subdirectories under \fI/path/to/parent_directory\fR:
+.RS
+organize_by_month /path/to/parent_directory
+.RE
+
+The script will:
+.IP \[bu] 2
+Identify each subdirectory inside \fI/path/to/parent_directory\fR.
+.IP \[bu] 2
+Use \fIstat(1)\fR to extract the last modification time of each subdirectory.
+.IP \[bu] 2
+Create a directory named \fIYYYY-MM\fR (for example, 2024-12) if it doesn’t exist.
+.IP \[bu] 2
+Move the subdirectory into the appropriate \fIYYYY-MM\fR directory.
+
+.SH REQUIREMENTS
+The script relies on:
+.IP \[bu] 2
+A POSIX-compatible shell (e.g., bash).
+.IP \[bu] 2
+The GNU \fIstat(1)\fR command to read file timestamps.
+.IP \[bu] 2
+Proper permissions to create directories and move subdirectories within the target directory.
+
+.SH EXAMPLES
+To organize a directory called \fIprojects\fR:
+.RS
+organize_by_month projects
+.RE
+
+After running this command, all subdirectories in \fIprojects\fR will be sorted into directories like \fI2024-01\fR, \fI2024-02\fR, etc., according to their last modification date.
+
+.SH SEE ALSO
+stat(1), mv(1), mkdir(1)
+
+.SH AUTHOR
+Written by Example Author.
